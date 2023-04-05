@@ -1,33 +1,48 @@
 import React from "react";
+import { useFormik } from "formik";
+
+const initValues = {
+  name: "",
+  status: "In Progress",
+};
 
 const TaskForm = () => {
+  const formik = useFormik({
+    initialValues: initValues,
+  });
+
+  console.log("Values Change: ", formik.values);
   return (
     <div className="is-flex is-justify-content-center">
       <form style={{ width: 350 }}>
-        <div class="field">
-          <label class="label" htmlFor="name">
+        <div className="field">
+          <label className="label" htmlFor="name">
             Name
           </label>
-          <div class="control">
+          <div className="control">
             <input
               name="name"
-              class="input"
+              className="input"
               type="text"
               placeholder="Text input"
+              value={formik.values.name}
+              onChange={formik.handleChange}
             />
           </div>
         </div>
-        <div class="field">
-          <label class="label" htmlFor="status">
+        <div className="field">
+          <label className="label" htmlFor="status">
             Status
           </label>
-          <div class="control">
-            <input
+          <div className="select">
+            <select
               name="status"
-              class="input"
-              type="text"
-              placeholder="Text input"
-            />
+              onChange={formik.handleChange}
+              value={formik.values.status}
+            >
+              <option>In Progress</option>
+              <option>Completed</option>
+            </select>
           </div>
         </div>
         <button className="button is-primary">Submit</button>
