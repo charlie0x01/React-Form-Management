@@ -6,15 +6,19 @@ const initValues = {
   status: "In Progress",
 };
 
+const onSubmit = (values) => {
+  console.log("Form Submit: ", values);
+};
+
 const TaskForm = () => {
   const formik = useFormik({
     initialValues: initValues,
+    onSubmit: onSubmit,
   });
 
-  console.log("Values Change: ", formik.values);
   return (
     <div className="is-flex is-justify-content-center">
-      <form style={{ width: 350 }}>
+      <form style={{ width: 350 }} onSubmit={formik.handleSubmit}>
         <div className="field">
           <label className="label" htmlFor="name">
             Name
@@ -45,7 +49,9 @@ const TaskForm = () => {
             </select>
           </div>
         </div>
-        <button className="button is-primary">Submit</button>
+        <button type="submit" className="button is-primary">
+          Submit
+        </button>
       </form>
     </div>
   );
